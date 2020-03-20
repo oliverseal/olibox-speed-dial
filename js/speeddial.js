@@ -32,7 +32,6 @@ function generateBookmarkLink(bookmark) {
     styleString += (key + ': ' + style[key]);
   });
   const textStyleString = `color: ${textColor}`;
-  console.log(textStyleString);
 
   const bookmarkLink = html`<div class="bookmark" style="${styleString}">
     <a href="${bookmark.url}" style="${textStyleString}">
@@ -44,6 +43,7 @@ function generateBookmarkLink(bookmark) {
 }
 
 function updateDial(folderId) {
+  const textColor = JSON.parse(localStorage.getItem('text-color') || DEFAULT_SETTINGS['text-color']);
   const speeddial = document.querySelector('.speeddial');
   while (speeddial.hasChildNodes()) {
     speeddial.removeChild(speeddial.firstChild);
@@ -69,6 +69,18 @@ function updateDial(folderId) {
 
     localStorage.setItem('thumbnails', JSON.stringify(bookmarksDataset));
   });
+
+  localStorage.setItem('last-accessed-folder', folderId);
+  const navItems = document.querySelectorAll('nav a');
+  navItems.forEach((navItem) => {
+    if (navItem.dataset.folderId === folderId) {
+      navItem.classList.add('active');
+      navItem.style.borderBottom = `1px solid ${textColor}`;
+    } else {
+      navItem.classList.remove('active');
+      navItem.style.borderBottom = '';
+    }
+  });
 }
 
 function updateNav() {
@@ -81,14 +93,19 @@ function updateNav() {
   activeFolders.forEach((folder) => {
     const folderLink = generateActiveFolderLink(folder);
     folderLink.addEventListener('click', (e) => {
+      e.preventDefault();
       updateDial(e.currentTarget.dataset.folderId);
     });
     nav.appendChild(folderLink);
   });
-
-  if (activeFolders.length > 0) {
-    const firstFolder = activeFolders[0];
-    updateDial(firstFolder.id);
+  const lastFolderId = localStorage.getItem('last-accessed-folder');
+  if (!lastFolderId) {
+    if (activeFolders.length > 0) {
+      const firstFolder = activeFolders[0];
+      updateDial(firstFolder.id);
+    }
+  } else {
+    updateDial(lastFolderId);
   }
 }
 
