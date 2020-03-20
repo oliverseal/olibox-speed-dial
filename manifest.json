@@ -1,0 +1,23 @@
+{
+	"chrome_url_overrides": {
+		"newtab": "speeddial.html"
+	},
+	"description": "A speed dial functionally similar to the one used in Vivaldi.",
+	"icons": {
+		"512": "icon512.png",
+		"256": "icon256.png",
+		"128": "icon128.png",
+		"32": "icon32.png",
+		"16": "icon16.png"
+	},
+	"manifest_version": 2,
+	"name": "Speed Dial",
+	"options_page": "settings.html",
+	"permissions": ["background", "bookmarks", "storage", "tabs", "activeTab", "<all_urls>"],
+	"background": {
+		"scripts": ["js/page.js"],
+		"persistent": false
+	},
+	"update_url": "http://clients2.google.com/service/update2/crx",
+	"version": "1.0.0"
+}

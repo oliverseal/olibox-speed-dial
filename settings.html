@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
+  <title>Speed Dial Settings</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/lighterhtml.min.js"></script>
+</head>
+<body>
+  <h1>Speed Dial Settings</h1>
+  <div class="setting-help">
+    <p>NOTE: Changing settings will auto-save.</p>
+  </div>
+  <div class="settings">
+    <div class="setting">
+      <div class="setting-label">Columns</div>
+      <div class="setting-help">
+        <p>How many columns should the tiles appear in?</p>
+      </div>
+      <div class="setting-form">
+        <input class="setting-value" name="columns" type="number" min="1" max="12" />
+      </div>
+    </div>
+
+    <div class="setting">
+      <div class="setting-label">Thumbnail Refresh Rate</div>
+      <div class="setting-help">
+        <p>How often, in seconds, should the previews be updated. Defaults to 86400 (one day).</p>
+      </div>
+      <div class="setting-form">
+        <input class="setting-value" name="thumbnail-refresh-rate" type="number" />
+      </div>
+    </div>
+
+    <div class="setting">
+      <div class="setting-label">Background Color</div>
+      <div class="setting-help">
+        <p>The background color for the page.</p>
+      </div>
+      <div class="setting-form">
+        <input class="setting-value" name="background-color" type="color" />
+      </div>
+    </div>
+
+    <div class="setting">
+      <div class="setting-label">Text Color</div>
+      <div class="setting-help">
+        <p>The text color for the page.</p>
+      </div>
+      <div class="setting-form">
+        <input class="setting-value" name="text-color" type="color" />
+      </div>
+    </div>
+
+    <div class="setting">
+      <div class="setting-label">Active Folders</div>
+      <div class="setting-help">
+        <p>
+          The links across the top. There is no limit on how many you select, only how
+          many you can physically click on. i.e. If you select 1280 and have a 1280
+          pixel wide screen, every link would be 1 pixel wide.
+        </p>
+      </div>
+      <div class="setting-form">
+        <input class="setting-value" name="active-folders" type="hidden" />
+        <div class="active-folders-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/settings.js" type="module"></script>
+</body>
+</html>
