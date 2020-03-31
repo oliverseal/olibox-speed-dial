@@ -23,13 +23,15 @@ function generateActiveFolderLink(activeFolder) {
 function generateBookmarkLink(bookmark) {
   const textColor = JSON.parse(localStorage.getItem('text-color') || DEFAULT_SETTINGS['text-color']);
   const columns = parseInt(JSON.parse(localStorage.getItem('columns') || '4'), 10);
+  const minWidth = parseInt(JSON.parse(localStorage.getItem('thumbnail-min-width') || '0'), 10);
   const thumbnailUrl = getThumbnailUrl(bookmark);
   const style = {
     width: (100 / columns) + '%',
+    'min-width': minWidth + 'px',
   };
   let styleString = '';
   Object.keys(style).forEach((key) => {
-    styleString += (key + ': ' + style[key]);
+    styleString += (key + ': ' + style[key] + ';');
   });
   const textStyleString = `color: ${textColor}`;
 
@@ -109,12 +111,48 @@ function updateNav() {
   }
 }
 
+function showOmnibarThing() {
+  let addressbar = document.querySelector('.addressbar');
+  addressbar.style.display = 'block';
+
+  let input = addressbar.querySelector('input');
+  if (input.value === '') {
+    input.value = 'http://';
+  }
+  input.focus();
+  input.selectionStart = input.selectionEnd = input.value.length;
+}
+
+function hideOmnibarThing() {
+  let addressbar = document.querySelector('.addressbar');
+  addressbar.style.display = 'none';
+}
+
 function speeddial() {
   const backgroundColor = JSON.parse(localStorage.getItem("background-color") || DEFAULT_SETTINGS['background-color']);
   const textColor = JSON.parse(localStorage.getItem("text-color") || DEFAULT_SETTINGS['text-color']);
   document.body.style.backgroundColor = backgroundColor;
   document.body.style.color = textColor;
   updateNav();
+
+  let addressbar = document.querySelector('.addressbar');
+  let input = addressbar.querySelector('input');
+
+  // also because sometimes fullscreen
+  document.body.addEventListener('keypress', (e) => {
+    if (e.target != input) {
+      if (e.charCode === 111) {
+        e.preventDefault();
+        showOmnibarThing();
+      }
+    } else {
+      if (e.charCode === 13) {
+        window.location = input.value;
+        hideOmnibarThing();
+      }
+    }
+  });
+  input.addEventListener('blur', hideOmnibarThing);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -20,7 +20,7 @@ nav a {
   display: flex;
   width: 95vw;
   margin-left: 2.5vw;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
   flex-wrap: wrap;
 }
@@ -115,4 +115,26 @@ nav a {
 
 .active-folders-list-checkbox-child span {
   margin-left: 1rem;
+}
+
+
+.addressbar {
+  position: fixed;
+  top: 6rem;
+  display: block;
+  border: 2px solid black;
+  background: white;
+  width: 80vw;
+  margin-left: 10vw;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.addressbar input {
+  width: 100%;
+  display: block;
+  border: none;
+  outline: none;
+  line-height: 2rem;
+  font-size: 1rem;
 }

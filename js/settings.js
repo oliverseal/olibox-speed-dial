@@ -7,6 +7,7 @@ const DEFAULT_SETTINGS = {
   'text-color': '"#000000"',
   'active-folders': "",
   'thumbnail-refresh-rate': 86400,
+  'thumbnail-min-width': 250,
 };
 
 
@@ -46,6 +47,7 @@ function translateToSetting(field) {
       return field.value;
     case 'column':
     case 'thumbnail-refresh-rate':
+    case 'thumbnail-min-width':
       return parseInt(field.value, 10);
     default:
       return JSON.stringify(field.value);
