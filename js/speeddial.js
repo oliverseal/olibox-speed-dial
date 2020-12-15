@@ -147,7 +147,11 @@ function speeddial() {
       }
     } else {
       if (e.charCode === 13) {
-        window.location = input.value;
+        if (input.value.indexOf('http') === 0) {
+          window.location = input.value;
+        } else {
+          window.location = `https://google.com/search?q=${input.value}`;
+        }
         hideOmnibarThing();
       }
     }
@@ -158,5 +162,6 @@ function speeddial() {
 document.addEventListener("DOMContentLoaded", () => {
   if (window.location.pathname == "/speeddial.html") {
     speeddial();
+    setTimeout(() => document.body.focus(), 500);
   }
 });
